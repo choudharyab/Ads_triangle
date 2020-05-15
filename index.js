@@ -8,10 +8,15 @@ const bodyParser = require("body-parser");
 const express = require("express");
 const multer = require('multer');
 const cors=require('cors');
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const app = express();
 const apis = require("./src");
 const response = utils.response
+const swaggerOptions = utils.swagger;
+const swaggerDocs = swaggerJsDoc(swaggerOptions);
 
+app.use("/api-docs",swaggerui.server,swaggerui.setup(swaggerDocs));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true, limit: '50mb'}));

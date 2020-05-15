@@ -7,9 +7,18 @@ const {
 const helpers = require("../helpers");
 
 
+const createAgency = async (req ,res) => {
+    try {
+        
+    } catch (error) {
+        
+    }
+
+}
+
 
 
 
 module.exports = {
-    
+    createAgency
 }

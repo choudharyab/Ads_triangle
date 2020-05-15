@@ -64,6 +64,10 @@ const SUCCESS_STATUS = {
 
 
 
+const SEQUEL_TABLE_NAME = {
+	AGENCY_TABLE: 'agency',
+	CLIENT_TABLE: 'client'
+}
 
 
 
@@ -75,6 +79,7 @@ const SUCCESS_STATUS = {
 module.exports = {
 	...ERROR_STATUS,
 	...SUCCESS_STATUS,
+	...SEQUEL_TABLE_NAME
    
 	
 	
