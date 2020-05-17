@@ -1,8 +1,8 @@
 'use strict';
 
 
-const {mysqlDB, mysqlDBRead, constants} = require(`${rootDir}/utils`)
-const Op = mysqlDBRead.Sequelize.Op;
+const {mysqlDB, constants} = require(`${rootDir}/utils`)
+const Op = mysqlDB.Sequelize.Op;
 
 
 

@@ -19,7 +19,7 @@ const sequelize = new Sequelize(setting);
 //     force: false
 // });
 
-const modelPath = `${rootDir}/model/sequel`;
+const modelPath = `${rootDir}/model`;
 const excludeFile = ['index.js', 'fileRecord.js', 'fileUploadType.js']
 
 fs.readdirSync(modelPath)

@@ -1,6 +1,6 @@
 'use strict';
 
-const constants = require(`../../utils/constants`)
+const constants = require(rootDir +'/utils/constants')
 
 
 module.exports = function (sequelize, DataTypes) {

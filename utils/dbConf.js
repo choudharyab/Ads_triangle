@@ -1,10 +1,5 @@
 'use strict';
 
-const actionFileName = arguments['1'].main.filename.split("/").pop()
-
-if(actionFileName == 'sequelize'){
-    global.sequelizePath = __dirname
-}
 
 
 require("dotenv").config()
