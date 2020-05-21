@@ -1,38 +1,39 @@
 'use strict';
 
-const dbRead = require('./../utils/dbRead');
-const Constants = require('./consts');
 const jwt = require('jsonwebtoken');
 
+const checkCredentials = async function(req,res){
+    try{
+       let name = "test@gmail.com";
+       let token = jwt.sign({email: name}, process.env.USER_JWT_SECRET, {expiresIn: 1440 });       
+        res.json({
+                type: true,
+                token: token,
+        });
+       
+    }catch(err){
+        res.status(500).send(err);
+    }
 
-const jwtAdminAuth = ((req, res, next) => {
+};
 
-    console.log('admin jwt called ' + JSON.stringify(req.headers));
-
-    const token = req.headers.adminauth.split(" ")[1];
-
-    console.log('jwt user called');
-
-    jwt.verify(token, process.env.ADMIN_JWT_SECRET, function (err, payload) {
-        if (payload) {
-            dbRead.admin.findOne({where: {email_id: payload.email_id}}).then(
-                (userInfo) => {
-                    req.user = userInfo;
-                    next()
-                }
-            )
-        } else {
-            res.status(401).json({
-                status: Constants.ERROR_401,
-                message: "You are not authorized"
-            })
-        }
-    })
-
-
-});
-
+const ensureAuthorizedUser = function(req, res, next){
+    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if(typeof token !== 'undefined'){
+        jwt.verify(token,process.env.USER_JWT_SECRET, function(err, decoded){
+            if(err || !decoded){
+                console.log(err);
+                res.status(401).json({ error: 'Unauthorized'});
+            }else{
+                 next();
+            }
+        });
+    }else {
+        res.status(403).json({ error: 'Forbidden'});
+    }
+};
 
 module.exports = {
-	jwtAdminAuth
+	checkCredentials,
+    ensureAuthorizedUser
 }
